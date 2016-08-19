@@ -17,8 +17,8 @@ The url match with a pattern. A pattern is like a very very simplified regex. Th
 #Example
 
 If you watch a series named FOOBAR in a website named : www.series/, the url would probably be something like :
-    ``` www.series/545de-episode-5-season-8-FOOBAR```
+    ```www.series/545de-episode-5-season-8-FOOBAR```
 for this case you would make a pattern like :
-   ``` www.series/${IGNORE}-episode-{EPISODE}-season-{SEASON}-{NAME}```
+   ```www.series/${IGNORE}-episode-{EPISODE}-season-{SEASON}-{NAME}```
 
 Remember to ignore the part of the url which have no sense for you with the ${IGNORE} token.
