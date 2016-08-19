@@ -76,8 +76,6 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status !== "loading")
     return;
 
-  console.log('get a notifications here');
-
   chrome.storage.local.get('state', obj => {
 
     let state = JSON.parse(obj.state || '{}');
@@ -127,6 +125,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
  * @returns An array of matches.
  */
 function getUrlMatches(templatesUrl, url) {
+
   return templatesUrl
     .map(i => i.name)
     .map(templateUrl => {
@@ -175,6 +174,5 @@ function getUrlMatches(templatesUrl, url) {
     })
     .filter(result => result !== null);
 }
-
 
 require('./background/contextMenus');

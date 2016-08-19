@@ -4,10 +4,7 @@ const uuid = require('uuid');
 
 import { ADD_TEMPLATE_URL, REMOVE_TEMPLATE_URL } from '../constants/TemplateUrlTypes';
 
-const initialState = [{
-    name: "http://www.full-serie.com/seriestv/${IGNORE}-${NAME}-saison-${SEASON}-episode-${EPISODE}.html",
-    id: uuid.v4()
-}];
+const initialState = [];
 
 export default function urlTemplate(state = initialState, action) {
   switch (action.type) {
