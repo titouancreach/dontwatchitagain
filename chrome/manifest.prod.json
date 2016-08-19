@@ -1,10 +1,10 @@
 {
-  "version": "0.0.0",
-  "name": "react-chrome-extension-example",
+  "version": "0.0.1",
+  "name": "dont-watch-it-again",
   "manifest_version": 2,
-  "description": "Example for react-chrome-extension-boilerplate",
+  "description": "Never watch the same episode again",
   "browser_action": {
-    "default_title": "React Chrome Extension Example",
+    "default_title": "Don't watch it again",
     "default_popup": "popup.html"
   },
   "icons": {
@@ -12,12 +12,9 @@
     "48": "img/icon-48.png",
     "128": "img/icon-128.png"
   },
-  "web_accessible_resources": [
-    "inject.html"
-  ],
   "background": {
     "page": "background.html"
   },
-  "permissions": [ "contextMenus", "tabs", "storage", "https://github.com/*" ],
+  "permissions": [ "contextMenus", "tabs", "storage", "management", "notifications" ],
   "content_security_policy": "default-src 'self'; script-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;"
 }

@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 
+
 const host = 'localhost';
 const port = 3000;
 const customPath = path.join(__dirname, './customPublicPath');
@@ -9,7 +10,7 @@ const hotScript = 'webpack-hot-middleware/client?path=__webpack_hmr&dynamicPubli
 const baseDevConfig = () => ({
   devtool: 'eval-cheap-module-source-map',
   entry: {
-    todoapp: [customPath, hotScript, path.join(__dirname, '../chrome/extension/todoapp')],
+    dontwatchitagain: [customPath, hotScript, path.join(__dirname, '../chrome/extension/dontwatchitagain')],
     background: [customPath, hotScript, path.join(__dirname, '../chrome/extension/background')],
   },
   devMiddleware: {
@@ -57,22 +58,15 @@ const baseDevConfig = () => ({
         'css?modules&sourceMap&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
         'postcss'
       ]
-    }]
+    },
+    {test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff'},
+    {test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream'},
+    {test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file'},
+    {test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'}]
   }
 });
 
 const injectPageConfig = baseDevConfig();
-injectPageConfig.entry = [
-  customPath,
-  path.join(__dirname, '../chrome/extension/inject')
-];
-delete injectPageConfig.hotMiddleware;
-delete injectPageConfig.module.loaders[0].query;
-injectPageConfig.plugins.shift(); // remove HotModuleReplacementPlugin
-injectPageConfig.output = {
-  path: path.join(__dirname, '../dev/js'),
-  filename: 'inject.bundle.js',
-};
 const appConfig = baseDevConfig();
 
 module.exports = [

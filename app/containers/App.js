@@ -1,33 +1,72 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import Header from '../components/Header';
-import MainSection from '../components/MainSection';
-import * as TodoActions from '../actions/todos';
-import style from './App.css';
+
+import * as HistoryAction from '../actions/history';
+import * as TemplateUrlAction from '../actions/templateUrl.js'
+
+import HistoryLayout from '../components/HistoryLayout';
+import TemplateUrlLayout from '../components/TemplateUrlLayout'
+
+import { Nav, NavItem } from 'react-bootstrap';
 
 @connect(
   state => ({
-    todos: state.todos
+    history: state.history,
+    templateUrl: state.templateUrl
   }),
   dispatch => ({
-    actions: bindActionCreators(TodoActions, dispatch)
+    actions: {
+      history: {
+        ...bindActionCreators(HistoryAction, dispatch)
+      },
+      templateUrl: {
+        ...bindActionCreators(TemplateUrlAction, dispatch)
+      }
+    }
   })
 )
 export default class App extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {...this.state, selectedTab: 1};
+  }
+
+  onChangeTab = (selectedTabKey) => {
+    this.setState({
+      ...this.state,
+      selectedTab: selectedTabKey
+    });
+    console.log(selectedTabKey);
+  }
+
   static propTypes = {
-    todos: PropTypes.array.isRequired,
+    history: PropTypes.array.isRequired,
+    templateUrl: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
   };
 
   render() {
-    const { todos, actions } = this.props;
+    const { history, actions, templateUrl } = this.props;
 
     return (
-      <div className={style.normal}>
-        <Header addTodo={actions.addTodo} />
-        <MainSection todos={todos} actions={actions} />
+      <div>
+        <Nav bsStyle="tabs" activeKey={this.state.selectedTab} onSelect={this.onChangeTab}>
+          <NavItem eventKey={1}> Edit URL </NavItem>
+          <NavItem eventKey={2}> History </NavItem>
+        </Nav>
+
+        {(() => {
+          switch (this.state.selectedTab) {
+            case 1:
+              return (<TemplateUrlLayout actions={actions} templatesUrl={templateUrl}>NOT IMPLEMENTED</TemplateUrlLayout>);
+            case 2:
+              return (<HistoryLayout history={history} actions={actions}/>);
+            default:
+              return (<div>NOT IMPLEMENTED</div>);
+          }
+        })()}
       </div>
     );
   }

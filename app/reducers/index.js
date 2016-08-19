@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import todos from './todos';
+import history from './history';
+import templateUrl from './templateUrl';
 
 export default combineReducers({
-  todos
+  history,
+  templateUrl
 });
