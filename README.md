@@ -4,11 +4,11 @@ DWIA is a chrome extension for people who watch their series in streaming.
 It detects the episode you have ever seen and prevents you to watch it again.
 
 # How it's work ?
-The chrome extension scans the url you visite and look if the url match with a pattern, if yes, it save the episode, the season and the name.
+The chrome extension scans the url you visite and watch for match between the URL and a pattern, if yes, it saves the episode, the season and the name.
 If you have ever visited this url, a notification shows up.
 
 # Patterns
-The url match with a pattern. A pattern is like a very very simplified regex. The special tokens are :
+The url matches with a pattern. A pattern is like a very very simplified regex. The special tokens are :
   - ${NAME} for the name of the series.
   - ${EPISODE} for the episode.
   - ${SEASON} for the season.
